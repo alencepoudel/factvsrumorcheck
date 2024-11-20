@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City of Sugar Land Engineering Department - Fact vs Rumor Check</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 80%;
+            height: 200px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            margin-top: 10px;
+        }
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+            display: none;
+        }
+        .highlight {
+            font-weight: bold;
+            color: white;
+            padding: 5px 10px;
+        }
+        .fact {
+            background-color: green;
+        }
+        .rumor {
+            background-color: red;
+        }
+        #spinner {
+            display: none;
+            margin: 20px auto;
+            border: 10px solid #f3f3f3;
+            border-top: 10px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="title">
+        Welcome to the official Fact vs Rumor Check page for the City of Sugar Land Engineering Department
+    </div>
+    <p><strong>Created by:</strong> MAD Team</p>
+    <textarea id="userInput" maxlength="1000000" placeholder="Enter your statement here..."></textarea>
+    <div class="buttons">
+        <button onclick="factCheck()">Fact Check</button>
+        <button onclick="resetPage()">Cancel</button>
+    </div>
+    <div id="spinner"></div>
+    <div id="result"></div>
+
+    <script>
+        function resetPage() {
+            document.getElementById('userInput').value = '';
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('spinner').style.display = 'none';
+        }
+
+        function factCheck() {
+            const spinner = document.getElementById('spinner');
+            const result = document.getElementById('result');
+            const responses = [
+                `<span class="highlight rumor">#RUMOR</span>: Oh dear, you just served us a rumor sandwich with extra baloney. Shame on you for spreading this false rumor!`,
+                `<span class="highlight fact">#FACT</span>: Congratulations! You're following the path of truth. Someone hand this person a mic because they’re spitting facts and dropping straight knowledge.`
+            ];
+
+            result.style.display = 'none';
+            spinner.style.display = 'block';
+
+            setTimeout(() => {
+                spinner.style.display = 'none';
+                result.style.display = 'block';
+                result.innerHTML = responses[Math.floor(Math.random() * responses.length)];
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
